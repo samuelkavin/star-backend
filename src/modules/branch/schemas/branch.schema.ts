@@ -1,15 +1,16 @@
 import * as mongoose from 'mongoose';
 import {StatusEnum} from 'src/utils/enums/status.enum';
 import {validateEmail} from 'src/utils/validations/email-validation';
-export const CompanySchema = new mongoose.Schema(
+
+export const BranchSchema = new mongoose.Schema(
   {
-    companyName: {
+    name: {
       type: String,
       required: [true, 'COMPANY_NAME_IS_BLANK'],
     },
-    businessRegNumber: {
+    location: {
       type: String,
-      required: [true, 'COMPANY_REG_NUM_IS_BLANK'],
+      required: true,
     },
     email: {
       type: String,
@@ -34,11 +35,22 @@ export const CompanySchema = new mongoose.Schema(
       type: StatusEnum,
       required: true,
     },
-    preferredLanguage: {
-      type: String,
+    address: {},
+    isRegisteredAsCompany: {
+      type: Boolean,
       required: true,
     },
-    address: {},
+    companyName: {
+      type: String,
+    },
+    businessRegNumber: {
+      type: String,
+    },
+    companyId: {
+      type: String,
+      unique: true,
+      required: true,
+    },
   },
   {
     versionKey: false,

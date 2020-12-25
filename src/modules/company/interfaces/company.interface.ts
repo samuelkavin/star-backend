@@ -1,4 +1,6 @@
 import {Document} from 'mongoose';
+import {StatusEnum} from 'src/utils/enums/status.enum';
+import {IAddress} from 'src/utils/interfaces/address.interface';
 
 export interface ICompany {
   companyName: string;
@@ -12,32 +14,6 @@ export interface ICompany {
 }
 
 export interface ICompanyDocument extends ICompany, Document {}
-
-export interface IDirector {
-  name: string;
-  nric: string;
-  gender: string;
-  race: string;
-  designation: string;
-  contactNumber?: string;
-  email?: string;
-}
-
-export interface IAddress {
-  line1: string;
-  line2?: string;
-  city: string;
-  passcode: string;
-  state: string;
-  country: string;
-}
-
-export enum StatusEnum {
-  Created = 'CREATED',
-  Active = 'ACTIVE',
-  Inactive = 'INACTIVE',
-  Suspended = 'SUSPENDED',
-}
 
 export enum LanguageEnum {
   EN = 'ENGLISH',

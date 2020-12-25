@@ -1,15 +1,28 @@
 import * as mongoose from 'mongoose';
-import {StatusEnum} from 'src/utils/enums/status.enum';
+import {GenderEnum} from 'src/utils/enums/gender.enum';
+import {RaceEnum} from 'src/utils/enums/race.enum';
 import {validateEmail} from 'src/utils/validations/email-validation';
-export const CompanySchema = new mongoose.Schema(
+export const DirectorSchema = new mongoose.Schema(
   {
-    companyName: {
+    name: {
       type: String,
       required: [true, 'COMPANY_NAME_IS_BLANK'],
     },
-    businessRegNumber: {
+    nric: {
       type: String,
       required: [true, 'COMPANY_REG_NUM_IS_BLANK'],
+    },
+    gender: {
+      type: GenderEnum,
+      required: true,
+    },
+    race: {
+      type: RaceEnum,
+      required: true,
+    },
+    designation: {
+      type: String,
+      required: [true, 'DESIGNATION_IS_BLANK'],
     },
     email: {
       type: String,
@@ -20,25 +33,15 @@ export const CompanySchema = new mongoose.Schema(
       validate: [validateEmail, 'Please enter a valid email'],
       required: [true, 'EMAIL_IS_BLANK'],
     },
-    phone: {
+    mobile: {
       type: String,
       unique: true,
-      required: [true, 'PHONE_IS_BLANK'],
+      required: [true, 'MOBILE_IS_BLANK'],
     },
-    fax: {
-      type: String,
-      unique: true,
-      required: [true, 'PHONE_IS_BLANK'],
-    },
-    status: {
-      type: StatusEnum,
-      required: true,
-    },
-    preferredLanguage: {
+    companyId: {
       type: String,
       required: true,
     },
-    address: {},
   },
   {
     versionKey: false,

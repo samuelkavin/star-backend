@@ -1,26 +1,26 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsEmail, IsEnum, IsNotEmpty, MaxLength, MinLength} from 'class-validator';
+import {IsNotEmpty, MinLength, MaxLength, IsEmail, IsEnum, IsOptional, IsMongoId} from 'class-validator';
 import {AddressDto} from 'src/utils/dto/address.dto';
 import {StatusEnum} from 'src/utils/enums/status.enum';
 import {IAddress} from 'src/utils/interfaces/address.interface';
-import {ICompany, LanguageEnum} from '../interfaces/company.interface';
+import {IBranch} from '../interfaces/branch.interface';
 
-export class CompanyDto implements ICompany {
+export class BranchDto implements IBranch {
   @ApiProperty({
     example: 'Abc Company',
     description: 'Company name',
     format: 'string',
   })
   @IsNotEmpty()
-  companyName: string;
+  name: string;
 
   @ApiProperty({
-    example: 'ABC123',
-    description: 'Company registration number',
+    example: 'Butterworth',
+    description: 'Company location',
     format: 'string',
   })
   @IsNotEmpty()
-  businessRegNumber: string;
+  location: string;
 
   @ApiProperty({
     example: 'example@gmail.com',
@@ -34,7 +34,7 @@ export class CompanyDto implements ICompany {
   @MaxLength(255)
   @IsEmail()
   @IsNotEmpty()
-  readonly email: string;
+  email: string;
 
   @ApiProperty({
     example: '+60124174701',
@@ -50,22 +50,46 @@ export class CompanyDto implements ICompany {
     format: 'string',
   })
   @IsNotEmpty()
-  fax: string;
-
-  @IsNotEmpty()
-  @IsEnum(LanguageEnum)
-  @ApiProperty({enum: LanguageEnum})
-  @IsNotEmpty()
-  readonly preferredLanguage: LanguageEnum;
+  fax?: string;
 
   @IsNotEmpty()
   @IsEnum(StatusEnum)
   @ApiProperty({enum: StatusEnum})
-  readonly status: StatusEnum;
+  status: StatusEnum;
 
   @ApiProperty({
     type: AddressDto,
   })
   @IsNotEmpty()
   address: IAddress;
+
+  @ApiProperty()
+  @IsNotEmpty()
+  @IsOptional()
+  isRegisteredAsCompany?: boolean;
+
+  @ApiProperty({
+    example: 'Abc Company',
+    description: 'Company name',
+    format: 'string',
+  })
+  @IsNotEmpty()
+  companyName?: string;
+
+  @ApiProperty({
+    example: 'ABC123',
+    description: 'Company registration number',
+    format: 'string',
+  })
+  @IsNotEmpty()
+  businessRegNumber?: string;
+
+  @ApiProperty({
+    example: 'eyJhbGciOiJIUzI',
+    description: 'Company phone number',
+    format: 'string',
+  })
+  @IsNotEmpty()
+  @IsMongoId()
+  companyId: string;
 }
