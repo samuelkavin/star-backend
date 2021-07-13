@@ -36,7 +36,7 @@ export class CreateUserDto {
   })
   @IsNotEmpty()
   @IsString()
-  readonly mobileNumber: string;
+  readonly mobile: string;
 
   @ApiProperty({
     example: 'example@gmail.com',

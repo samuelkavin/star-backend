@@ -14,7 +14,6 @@ export class BranchService {
 
   async createBranch(response: BranchDto): Promise<any> {
     const getCompanyId = await this.companyService.getCompanyById(response.companyId);
-    console.log('wwww', getCompanyId);
     const result = new this.branchModel(response);
     return await this.branchModel.create(result);
   }

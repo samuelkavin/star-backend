@@ -1,6 +1,6 @@
 export enum RaceEnum {
-  Malay = 'MALAY',
-  Chinese = 'CHINESE',
-  Indian = 'INDIAN',
-  Others = 'OTHERS',
+  Malay = 'Malay',
+  Chinese = 'Chinese',
+  Indian = 'Indian',
+  Others = 'Others',
 }

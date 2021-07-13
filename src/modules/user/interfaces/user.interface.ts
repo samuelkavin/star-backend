@@ -10,9 +10,9 @@ export interface User extends Document {
   firstname: string;
   lastname: string;
   email: string;
-  mobileNumber: string;
+  mobile: string;
   password: string;
-  verification?: string;
+  verificationCode?: string;
   verified?: boolean;
   verificationExpires?: string;
   loginAttempts?: string;
@@ -21,8 +21,8 @@ export interface User extends Document {
 
 export interface VerifyEmail {
   email: string;
-  mobileNumber: string;
-  verification?: string;
+  mobile: string;
+  verificationCode?: string;
   verified?: boolean;
 }
 

@@ -10,7 +10,7 @@ export class VerifyUserDto implements VerifyEmail {
     required: true,
   })
   @IsNotEmpty()
-  readonly verification: string;
+  readonly verificationCode: string;
 
   @ApiProperty({
     example: 'example@gmail.com',
@@ -33,5 +33,5 @@ export class VerifyUserDto implements VerifyEmail {
   })
   @IsNotEmpty()
   @IsString()
-  readonly mobileNumber: string;
+  readonly mobile: string;
 }

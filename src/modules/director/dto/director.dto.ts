@@ -32,8 +32,8 @@ export class DirectorDto implements IDirector {
   race: RaceEnum;
 
   @ApiProperty({
-    example: '+60124174701',
-    description: 'Company fax number',
+    example: 'Director',
+    description: 'Position in company',
     format: 'string',
   })
   @IsNotEmpty()
@@ -62,7 +62,7 @@ export class DirectorDto implements IDirector {
   mobile: string;
 
   @ApiProperty({
-    example: 'eyJhbGciOiJIUzI',
+    example: '5fe628f5d9bb6ece26c45431',
     description: 'Company phone number',
     format: 'string',
   })

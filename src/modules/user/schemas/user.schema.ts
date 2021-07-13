@@ -9,6 +9,18 @@ const Schema = mongoose.Schema;
 
 export const UserSchema = new mongoose.Schema(
   {
+    firstname: {
+      type: String,
+      lowercase: true,
+      maxlength: 255,
+      required: [true, 'FIRST_NAME_IS_REQUIRED'],
+    },
+    lastname: {
+      type: String,
+      lowercase: true,
+      maxlength: 255,
+      required: [true, 'LAST_NAME_IS_REQUIRED'],
+    },
     email: {
       type: String,
       lowercase: true,
@@ -18,7 +30,7 @@ export const UserSchema = new mongoose.Schema(
       validate: [validateEmail, 'Please enter a valid email'],
       required: [true, 'EMAIL_IS_BLANK'],
     },
-    mobileNumber: {
+    mobile: {
       type: String,
       required: [true, 'MOBILE_NUM_IS_BLANK'],
     },
@@ -28,7 +40,7 @@ export const UserSchema = new mongoose.Schema(
       maxlength: 1024,
       required: [true, 'PASSWORD_IS_BLANK'],
     },
-    verification: {
+    verificationCode: {
       type: String,
       // validate: validator.isUUID,
     },

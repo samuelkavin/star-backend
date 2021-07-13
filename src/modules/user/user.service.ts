@@ -32,7 +32,7 @@ export class UserService {
   async signup(createUserDto: CreateUserDto): Promise<any> {
     const user = new this.userModel(createUserDto);
     await this.isEmailUnique(user.email);
-    await this.isMobileNumberUnique(user.mobileNumber);
+    await this.isMobileNumberUnique(user.mobile);
     await this.setRegistrationInfo(user);
     await user.save();
     // await sendEmail(user);
@@ -45,6 +45,7 @@ export class UserService {
 
     return {
       email: user.email,
+      verified: user.verified
     };
   }
 
@@ -78,7 +79,7 @@ export class UserService {
   private setRegistrationInfo(user): any {
     // user.verification = v4();
     crypto.randomBytes(3, function(err, buffer) {
-      user.verification = parseInt(buffer.toString('hex'), 16)
+      user.verificationCode = parseInt(buffer.toString('hex'), 16)
         .toString()
         .substr(0, 6);
     });
@@ -86,6 +87,7 @@ export class UserService {
   }
 
   private buildRegistrationInfo(user): any {
+    console.log('user', user)
     const userRegistrationInfo = {
       fullName: user.fullName,
       email: user.email,
@@ -123,15 +125,22 @@ export class UserService {
   }
 
   private async findByVerification(verifications: VerifyEmail): Promise<User> {
-    const {mobileNumber, email, verification} = verifications;
+    const {mobile, email, verificationCode} = verifications;
     const user = await this.userModel.findOne({
-      mobileNumber,
+      mobile,
       email,
-      verification,
+      verificationCode,
       verified: false,
     });
+
+    console.log('user1', user)
+
     if (!user) {
       throw new BadRequestException('Bad request.');
+    }
+
+    if (user.verified) {
+      throw new BadRequestException('User already verified');
     }
     return user;
   }

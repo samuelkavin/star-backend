@@ -35,4 +35,14 @@ export class DirectorService {
 
     return result;
   }
+
+  async getDirectorById(directorId: string): Promise<IDirector> {
+    let result;
+    try {
+      result = await this.directorModel.find({_id: directorId});
+    } catch (error) {
+      throw new NotFoundException('Director is not found!');
+    }
+    return result;
+  }
 }

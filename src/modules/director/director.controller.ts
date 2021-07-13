@@ -75,7 +75,40 @@ export class DirectorController {
     return this.directorService.getAllDirectors();
   }
 
-  @Get(':companyId')
+  @Get(':directorId')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return staff by id',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Unauthorized',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: 'Get particular staff details',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Internal server error',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_GATEWAY,
+    description: 'Internal communication error',
+    type: Error,
+  })
+  @ApiOperation({
+    operationId: 'getDirectorById',
+    summary: 'Get staff profile details',
+  })
+  async getDirectorById(@Param('directorId') directorId: string): Promise<IDirector> {
+    return await this.directorService.getDirectorById(directorId);
+  }
+
+  @Get('company/:companyId')
   @ApiResponse({
     status: HttpStatus.OK,
     description: 'Return company by id',

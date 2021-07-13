@@ -43,6 +43,7 @@ export class UserController {
     summary: 'Verify user email',
   })
   async verifyUserEmail(@Body() verifyUserDto: VerifyUserDto) {
+    console.log('verifyUserDto', verifyUserDto)
     return await this.userService.verifyUserEmail(verifyUserDto);
   }
 

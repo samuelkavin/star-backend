@@ -1,5 +1,13 @@
 import {ApiProperty} from '@nestjs/swagger';
-import {IsNotEmpty, MinLength, MaxLength, IsEmail, IsEnum, IsOptional, IsMongoId} from 'class-validator';
+import {
+  IsNotEmpty,
+  MinLength,
+  MaxLength,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsMongoId,
+} from 'class-validator';
 import {AddressDto} from 'src/utils/dto/address.dto';
 import {StatusEnum} from 'src/utils/enums/status.enum';
 import {IAddress} from 'src/utils/interfaces/address.interface';
@@ -86,7 +94,7 @@ export class BranchDto implements IBranch {
 
   @ApiProperty({
     example: 'eyJhbGciOiJIUzI',
-    description: 'Company phone number',
+    description: 'Company id',
     format: 'string',
   })
   @IsNotEmpty()
