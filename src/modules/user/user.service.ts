@@ -39,13 +39,13 @@ export class UserService {
     return this.buildRegistrationInfo(user);
   }
 
-  async verifyUserEmail(verifyUserDto: VerifyUserDto) {
+  async verifyUserAccount(verifyUserDto: VerifyUserDto) {
     const user = await this.findByVerification(verifyUserDto);
     await this.setUserAsVerified(user);
 
     return {
       email: user.email,
-      verified: user.verified
+      verified: user.verified,
     };
   }
 
@@ -87,11 +87,11 @@ export class UserService {
   }
 
   private buildRegistrationInfo(user): any {
-    console.log('user', user)
+    const {firstname, lastname, email, verified} = user;
     const userRegistrationInfo = {
-      fullName: user.fullName,
-      email: user.email,
-      verified: user.verified,
+      fullName: `${firstname} ${lastname}`,
+      email,
+      verified,
     };
     return userRegistrationInfo;
   }
@@ -130,10 +130,9 @@ export class UserService {
       mobile,
       email,
       verificationCode,
-      verified: false,
     });
 
-    console.log('user1', user)
+    console.log('user1', user);
 
     if (!user) {
       throw new BadRequestException('Bad request.');

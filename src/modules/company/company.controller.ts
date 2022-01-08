@@ -22,6 +22,7 @@ import {
 } from '@nestjs/swagger';
 import {StatusEnum} from 'src/utils/enums/status.enum';
 import {GetUser} from '../auth/decorators/get-user.decorator';
+import {IBranch} from '../branch/interfaces/branch.interface';
 import {User} from '../user/interfaces/user.interface';
 import {CompanyService} from './company.service';
 import {CompanyDto} from './dto/company.dto';
@@ -49,7 +50,6 @@ export class CompanyController {
     @Body() createBusinessProfile: CompanyDto,
     @GetUser() user: User,
   ): Promise<ICompany> {
-    console.log('user createCompanyProfile', user);
     return this.companyService.createCompanyProfile(createBusinessProfile);
   }
 
@@ -119,6 +119,39 @@ export class CompanyController {
   })
   async getCompanyById(@Param('companyId') companyId: string): Promise<ICompany> {
     return await this.companyService.getCompanyById(companyId);
+  }
+
+  @Get(':companyId/branches')
+  @ApiResponse({
+    status: HttpStatus.OK,
+    description: 'Return company by id',
+  })
+  @ApiResponse({
+    status: HttpStatus.UNAUTHORIZED,
+    description: 'Unauthorized',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.UNPROCESSABLE_ENTITY,
+    description: 'Get list of company branches',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.INTERNAL_SERVER_ERROR,
+    description: 'Internal server error',
+    type: Error,
+  })
+  @ApiResponse({
+    status: HttpStatus.BAD_GATEWAY,
+    description: 'Internal communication error',
+    type: Error,
+  })
+  @ApiOperation({
+    operationId: 'getCompanyBranches',
+    summary: 'Get list of company branches',
+  })
+  async getCompanyBranches(@Param('companyId') companyId: string): Promise<IBranch[]> {
+    return await this.companyService.getCompanyBranches(companyId);
   }
 
   @Put(':companyId')

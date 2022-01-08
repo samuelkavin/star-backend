@@ -17,18 +17,15 @@ export const BranchSchema = new mongoose.Schema(
       lowercase: true,
       maxlength: 255,
       minlength: 6,
-      unique: true,
       validate: [validateEmail, 'Please enter a valid email'],
       required: [true, 'EMAIL_IS_BLANK'],
     },
     phone: {
       type: String,
-      unique: true,
       required: [true, 'PHONE_IS_BLANK'],
     },
     fax: {
       type: String,
-      unique: true,
       required: [true, 'PHONE_IS_BLANK'],
     },
     status: {
@@ -48,7 +45,6 @@ export const BranchSchema = new mongoose.Schema(
     },
     companyId: {
       type: String,
-      unique: true,
       required: true,
     },
   },

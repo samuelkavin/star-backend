@@ -36,15 +36,14 @@ export class UserController {
     return await this.userService.signup(createUserDto);
   }
 
-  @Post('verify-email')
+  @Post('verify-account')
   @HttpCode(HttpStatus.OK)
   @ApiOperation({
-    operationId: 'verifyEmail',
-    summary: 'Verify user email',
+    operationId: 'verifyAccount',
+    summary: 'Verify user account',
   })
-  async verifyUserEmail(@Body() verifyUserDto: VerifyUserDto) {
-    console.log('verifyUserDto', verifyUserDto)
-    return await this.userService.verifyUserEmail(verifyUserDto);
+  async verifyUserAccount(@Body() verifyUserDto: VerifyUserDto) {
+    return await this.userService.verifyUserAccount(verifyUserDto);
   }
 
   @Post('signin')
